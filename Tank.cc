@@ -9,10 +9,23 @@
 using namespace std;
 using namespace genv;
 
+#define PI 3.14159265
 
 Tank::Tank(Point a, Size b, int angle_, bool turn_, bool& first_, Wind& wind, Tank* target_) : Widget(a, b), first(first_), wind(wind), target(target_){
     turn = turn_;
     tube_angle = angle_;
+}
+
+void Tank::barrel_draw(){
+    Point pos = get_pos();
+    gout << move_to(pos.x+12, pos.y)
+        << color(100,255,100);
+    for(int i=0; i<5; i++){
+        for(int j=0; j<5; j++){
+            gout << move_to(pos.x+12+i, pos.y+j)
+                 << line(cos((float)tube_angle*PI/180) * 20, -sin((float)tube_angle*PI/180) * 20);
+        }
+    }
 }
 
 void Tank::draw(){
@@ -22,6 +35,7 @@ void Tank::draw(){
         << color(100,255,100)
         //<< line(velo.x, velo.y)
         << box(size.w,size.h);
+    barrel_draw();
     if(bullet != nullptr) {
         bullet->draw();
     }
@@ -53,14 +67,14 @@ void Tank::next_turn(){
 void Tank::do_logic() {
     if(bullet != nullptr) {
         bullet->do_logic();
-        Point p = {bullet->get_pos().x+2, bullet->get_pos().y+2};
+        Point p = {bullet->get_pos().x, bullet->get_pos().y};
         //cout << bullets[i]->get_pos().y << endl;
-        if(bullet->get_velo().y > 0 && p.x >= target->get_pos().x+2 && p.x <= target->get_pos().x-2+target->get_size().w && p.y >= target->get_pos().y+2 && p.y <= target->get_pos().y-2+target->get_size().h){
+        if(bullet->get_velo().y > 0 && p.x >= target->get_pos().x-5 && p.x <= target->get_pos().x+5+target->get_size().w && p.y >= target->get_pos().y-5 && p.y <= target->get_pos().y+5+target->get_size().h){
             temp++;
             cout << temp << endl;
             next_turn();
         }
-        else if(p.y >= 700){
+        else if(p.y >= 720){
             next_turn();
         }
     }
@@ -75,11 +89,11 @@ void Tank::handle_event(const event& evt) {
             bullet = new Bullet({pos.x + size.w/3, pos.y}, tube_angle, power, wind.get_strength() , 1);
         }
 
-        if(evt.type == ev_key && evt.keycode == 'w' && tube_angle < 180){
-            tube_angle += 1;
+        if(evt.type == ev_key && evt.keycode == 'w' && tube_angle < 170){
+            tube_angle += 5;
         }
-        if(evt.type == ev_key && evt.keycode == 's' && tube_angle > 0){
-            tube_angle -= 1;
+        if(evt.type == ev_key && evt.keycode == 's' && tube_angle > 10){
+            tube_angle -= 5;
         }
 
         if(evt.type == ev_key && evt.keycode == 'e' && power < 5){

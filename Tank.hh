@@ -39,6 +39,8 @@ public:
     void do_logic() override;
 
     void draw() override;
+
+    void barrel_draw();
 };
 
 

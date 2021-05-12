@@ -18,8 +18,8 @@ Bullet::Bullet(Point a, int angle_, float power_, float wind_, int type_) : Widg
     pos_x = a.x;
     pos_y = a.y;
     power = power_/1.7;
-    velo.x = cos(angle_*PI/180) * power;
-    velo.y = -sin(angle_*PI/180) * power;
+    velo.x = cos((float)angle_*PI/180) * power;
+    velo.y = -sin((float)angle_*PI/180) * power;
     wind = wind_/3;
 
 }
