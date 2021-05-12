@@ -26,14 +26,17 @@ private:
     int type;
     float power;
     static constexpr float GRAVITY = 0.008;
+    float wind;
 
 public:
 
-    Bullet(Point a, int angle_, float power, int type_);
+    Bullet(Point a, int angle_, float power, float wind_, int type_);
 
     void draw() override;
 
     void do_logic() override;
+
+    Velocity get_velo();
 };
 
 

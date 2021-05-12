@@ -53,6 +53,8 @@
 		</Linker>
 		<Unit filename="Bullet.cc" />
 		<Unit filename="Bullet.hh" />
+		<Unit filename="Button.cc" />
+		<Unit filename="Button.hh" />
 		<Unit filename="MultipleChoice.cc" />
 		<Unit filename="MultipleChoice.hh" />
 		<Unit filename="NumberPicker.cc" />
@@ -62,6 +64,8 @@
 		<Unit filename="Tank.hh" />
 		<Unit filename="Widget.cc" />
 		<Unit filename="Widget.hh" />
+		<Unit filename="Wind.cc" />
+		<Unit filename="Wind.hh" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

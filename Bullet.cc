@@ -12,7 +12,7 @@ using namespace genv;
 
 #define PI 3.14159265
 
-Bullet::Bullet(Point a, int angle_, float power_, int type_) : Widget(a, {5,5}){
+Bullet::Bullet(Point a, int angle_, float power_, float wind_, int type_) : Widget(a, {5,5}){
     angle = angle_;
     type = type_;
     pos_x = a.x;
@@ -20,6 +20,7 @@ Bullet::Bullet(Point a, int angle_, float power_, int type_) : Widget(a, {5,5}){
     power = power_/1.7;
     velo.x = cos(angle_*PI/180) * power;
     velo.y = -sin(angle_*PI/180) * power;
+    wind = wind_/3;
 
 }
 
@@ -34,10 +35,14 @@ void Bullet::draw(){
 }
 
 void Bullet::do_logic() {
-    pos_x += velo.x;
-    pos_y += velo.y;
+    pos_x += velo.x*4 + wind;
+    pos_y += velo.y*4;
 
     set_pos({pos_x, pos_y});
-    velo.y += GRAVITY;
+    velo.y += GRAVITY*4;
 
+}
+
+Velocity Bullet::get_velo() {
+    return velo;
 }

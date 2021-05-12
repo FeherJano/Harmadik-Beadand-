@@ -40,9 +40,11 @@ void NumberPicker::draw(){
     int mid_h = pos.y + size.h/4 + (size.h/2 + szam_h)/2;
 
     if(selected_e == true){
-        gout << move_to(pos.x-5, pos.y-5)
-            << color(114,178,17)
-            << box(size.w+10, size.h+10);
+        if(pos.x >= 5 && pos.y >= 5) {
+            gout << move_to(pos.x-5, pos.y-5)
+                << color(114,178,17)
+                << box(size.w+10, size.h+10);
+        }
     }
 
     gout << move_to(pos.x,pos.y)

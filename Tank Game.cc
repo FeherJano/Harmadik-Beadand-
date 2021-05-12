@@ -5,8 +5,8 @@
 #include <sstream>
 #include "graphics.hpp"
 #include "MultipleChoice.hh"
-#include "Scroll.hh"
 #include "NumberPicker.hh"
+#include "Button.hh"
 #include "Tank.hh"
 
 using namespace genv;
@@ -32,9 +32,20 @@ int main() {
     widgets.push_back(new Bullet({0, 700}, 70, 5, 1));
 */
 
-    widgets.push_back(new Tank({40,700}, {30,10}));
+    Wind* wind = new Wind(960, 720, 30);
 
-    widgets.push_back(new NumberPicker({0, 0}, {200, 100}, -64, 64, false));
+    bool first = true;
+    Tank* tank1 = new Tank({100,700}, {30,10}, 45, true, first, *wind, nullptr);
+    Tank* tank2 = new Tank({840,700}, {30,10}, 135, false, first, *wind, nullptr);
+
+    tank1->set_target(tank2);
+    tank2->set_target(tank1);
+
+    widgets.push_back(wind);
+    widgets.push_back(tank1);
+    widgets.push_back(tank2);
+
+    //widgets.push_back(new NumberPicker({0, 0}, {200, 100}, -64, 64, false));
 
     for(size_t i=0; i<widgets.size();i++){
         widgets[i]->draw();
@@ -62,7 +73,7 @@ int main() {
 
         gout<<refresh;
 
-    gin.timer(7);
+    gin.timer(10);
     }
 
 
