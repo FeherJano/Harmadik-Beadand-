@@ -39,6 +39,9 @@ void Tank::draw(){
     if(bullet != nullptr) {
         bullet->draw();
     }
+    if(particles != nullptr) {
+        particles->draw();
+    }
 
 
     gout << move_to(pos.x,300)
@@ -72,10 +75,22 @@ void Tank::do_logic() {
         if(bullet->get_velo().y > 0 && p.x >= target->get_pos().x-5 && p.x <= target->get_pos().x+5+target->get_size().w && p.y >= target->get_pos().y-5 && p.y <= target->get_pos().y+5+target->get_size().h){
             temp++;
             cout << temp << endl;
+            if(particles == nullptr){
+                particles = new Particles(bullet->get_pos(), {255,255,0});
+            }
             next_turn();
         }
-        else if(p.y >= 720){
+        else if(p.y >= 700){
+            if(particles == nullptr){
+                particles = new Particles(bullet->get_pos(), {255,0,0});
+            }
             next_turn();
+        }
+    }
+    if(particles != nullptr){
+        if(particles->get_counter() > 20){
+            delete particles;
+            particles = nullptr;
         }
     }
 }

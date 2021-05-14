@@ -10,6 +10,7 @@
 #include <math.h>
 #include "graphics.hpp"
 #include "Bullet.hh"
+#include "Particles.hh"
 #include "Wind.hh"
 
 
@@ -18,6 +19,7 @@ private:
     int tube_angle = 45;
     int power = 3;
     Bullet* bullet = nullptr;
+    Particles* particles = nullptr;
     bool turn;
     bool& first;
     Wind& wind;

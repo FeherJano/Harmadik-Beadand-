@@ -59,6 +59,8 @@
 		<Unit filename="MultipleChoice.hh" />
 		<Unit filename="NumberPicker.cc" />
 		<Unit filename="NumberPicker.hh" />
+		<Unit filename="Particles.cc" />
+		<Unit filename="Particles.hh" />
 		<Unit filename="Tank Game.cc" />
 		<Unit filename="Tank.cc" />
 		<Unit filename="Tank.hh" />

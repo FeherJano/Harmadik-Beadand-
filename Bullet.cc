@@ -1,6 +1,5 @@
 #include "Bullet.hh"
 #include "graphics.hpp"
-#include "Widget.hh"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -21,7 +20,6 @@ Bullet::Bullet(Point a, int angle_, float power_, float wind_, int type_) : Widg
     velo.x = cos((float)angle_*PI/180) * power;
     velo.y = -sin((float)angle_*PI/180) * power;
     wind = wind_/3;
-
 }
 
 void Bullet::draw(){
