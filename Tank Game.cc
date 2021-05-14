@@ -32,7 +32,7 @@ int main() {
     widgets.push_back(new Bullet({0, 700}, 70, 5, 1));
 */
 
-    Wind* wind = new Wind(960, 720, 30);
+    Wind* wind = new Wind(960, 720, 15);
 
     bool first = true;
     Tank* tank1 = new Tank({100,700}, {30,10}, 45, true, first, *wind, nullptr);

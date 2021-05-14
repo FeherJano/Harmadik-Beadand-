@@ -42,7 +42,7 @@ void Tank::draw(){
 
 
     gout << move_to(pos.x,300)
-        << color(250,250,250)
+        << color(250,0,0)
         << text("power: " + to_string(power) + "\n" + "angle: " + to_string(tube_angle));
 
 }
@@ -103,12 +103,39 @@ void Tank::handle_event(const event& evt) {
             power -= 1;
         }
 
-        if(evt.keycode == 'd'){
-            set_pos({pos.x+5, pos.y});
+        if(evt.type == ev_key && evt.keycode == 'd'){
+            if(pos.x + size.w < 955){
+                if(target->get_pos().x < pos.x){
+                    set_pos({pos.x+5, pos.y});
+                }
+                else if( target->get_pos().x > pos.x + size.w + 5){
+                    set_pos({pos.x+5, pos.y});
+                }
+            }
+            if(target->get_pos().x + target->get_size().w < 960 && target->get_pos().x <= pos.x + size.w + 5){
+                if(target->get_pos().x > pos.x){
+                    target->set_pos({target->get_pos().x + 1, target->get_pos().y});
+                    set_pos({pos.x + 1, pos.y});
+                }
+            }
         }
 
         if(evt.type == ev_key && evt.keycode == 'a'){
-            set_pos({pos.x-5, pos.y});
+            if(pos.x > 5){
+                if(target->get_pos().x > pos.x){
+                    set_pos({pos.x-5, pos.y});
+                }
+                else if(target->get_pos().x < pos.x - size.w - 5){
+                    set_pos({pos.x-5, pos.y});
+                }
+            }
+
+            if(target->get_pos().x > 0 && target->get_pos().x >= pos.x - size.w - 5){
+                if(target->get_pos().x < pos.x){
+                    target->set_pos({target->get_pos().x - 1, target->get_pos().y});
+                    set_pos({pos.x - 1, pos.y});
+                }
+            }
         }
     }
 }
