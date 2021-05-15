@@ -11,7 +11,7 @@ using namespace genv;
 
 #define PI 3.14159265
 
-Tank::Tank(Point a, Size b, int angle_, bool turn_, bool& first_, Wind& wind, Tank* target_) : Widget(a, b), first(first_), wind(wind), target(target_){
+Tank::Tank(Point a, Size b, int angle_, bool turn_, bool& first_, Wind& wind, Tank* target_) : Widget(a, b, false), first(first_), wind(wind), target(target_){
     turn = turn_;
     tube_angle = angle_;
 }

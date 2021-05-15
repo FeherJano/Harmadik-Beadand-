@@ -19,7 +19,7 @@ struct Size {
 
 class Widget {
 public:
-    Widget(Point pos_ = { 0, 0 }, Size size_ = { 0, 0 });
+    Widget(Point pos_ = { 0, 0 }, Size size_ = { 0, 0 }, bool active_ = true);
     virtual ~Widget();
 
     virtual void draw() = 0;
@@ -34,10 +34,15 @@ public:
     Size get_size() const;
     void set_size(Size new_size);
 
+    bool get_active() const;
+    void set_active(bool is_active);
+
 
 private:
     Point pos;
     Size size;
+
+    bool active;
 };
 
 #endif

@@ -6,7 +6,7 @@
 #include "graphics.hpp"
 #include "MultipleChoice.hh"
 #include "NumberPicker.hh"
-#include "Button.hh"
+#include "Menu.hh"
 #include "Tank.hh"
 
 using namespace genv;
@@ -18,19 +18,15 @@ void clr_scr(int x, int y){
         << box (x,y);
 }
 
+
 int main() {
-    gout.open(960, 720);
-    //gout.load_font("LiberationSerif-Bold.ttf", 18, true);
+    Point canvas_ = {960, 720};
+    bool exit = false;
+    bool start_game = false;
+
+    gout.open(canvas_.x, canvas_.y);
 
     vector<Widget*> widgets;
-
-/*
-    widgets.push_back(new Bullet({0, 700}, 45, 1, 1));
-    widgets.push_back(new Bullet({0, 700}, 45, 2, 1));
-    widgets.push_back(new Bullet({0, 700}, 45, 3, 1));
-    widgets.push_back(new Bullet({0, 700}, 45, 4, 1));
-    widgets.push_back(new Bullet({0, 700}, 70, 5, 1));
-*/
 
     Wind* wind = new Wind(960, 720, 15);
 
@@ -41,6 +37,7 @@ int main() {
     tank1->set_target(tank2);
     tank2->set_target(tank1);
 
+    widgets.push_back(new Menu({0, 0}, {canvas_.x, canvas_.y}, exit, start_game));
     widgets.push_back(wind);
     widgets.push_back(tank1);
     widgets.push_back(tank2);
@@ -48,12 +45,13 @@ int main() {
     //widgets.push_back(new NumberPicker({0, 0}, {200, 100}, -64, 64, false));
 
     for(size_t i=0; i<widgets.size();i++){
-        widgets[i]->draw();
+        if(widgets[i]->get_active()){
+            widgets[i]->draw();
+        }
     }
     gout << refresh;
 
     event evt;
-    bool exit = false;
     while (!exit) {
         if (gin >> evt){
             if (evt.type == ev_key && evt.keycode == key_escape) {
@@ -61,14 +59,25 @@ int main() {
             }
         }
 
-        for(size_t i=0; i < widgets.size(); i++){
-            widgets[i]->handle_event(evt);
-            widgets[i]->do_logic();
+        if(start_game){
+            for(size_t i=0; i < widgets.size(); i++){
+                widgets[i]->set_active(!widgets[i]->get_active());
+            }
+            start_game = false;
         }
 
-        clr_scr(960,720);
         for(size_t i=0; i < widgets.size(); i++){
-            widgets[i]->draw();
+            if(widgets[i]->get_active()){
+                widgets[i]->handle_event(evt);
+                widgets[i]->do_logic();
+            }
+        }
+
+        clr_scr(canvas_.x, canvas_.y);
+        for(size_t i=0; i<widgets.size();i++){
+            if(widgets[i]->get_active()){
+                widgets[i]->draw();
+            }
         }
 
         gout<<refresh;

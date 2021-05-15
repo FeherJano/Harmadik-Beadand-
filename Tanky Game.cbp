@@ -55,6 +55,8 @@
 		<Unit filename="Bullet.hh" />
 		<Unit filename="Button.cc" />
 		<Unit filename="Button.hh" />
+		<Unit filename="Menu.cc" />
+		<Unit filename="Menu.hh" />
 		<Unit filename="MultipleChoice.cc" />
 		<Unit filename="MultipleChoice.hh" />
 		<Unit filename="NumberPicker.cc" />

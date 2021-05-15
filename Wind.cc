@@ -12,6 +12,7 @@ using namespace genv;
 
 Wind::Wind(int canvas_x, int canvas_y, int clouds_number) : canvas_x(canvas_x), canvas_y(canvas_y){
     Point cloud;
+    set_active(false);
     for(int i=0; i<clouds_number; i++){
         cloud.x = rand() % canvas_x;
         cloud.y = rand() % canvas_y/2;

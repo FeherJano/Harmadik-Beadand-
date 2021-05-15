@@ -25,7 +25,7 @@ void Button::draw(){
         << color(100,100,100)
         << box(size.w,size.h);
     gout << move_to(pos.x+2,pos.y+2)
-        << color(250,235,215)
+        << color(200,185,165)
         << box(size.w-4,size.h-4);
     gout << move_to(pos.x + size.w/4 + (size.w/2 - name_w)/2, mid_h)
         << color(0,0,0)
