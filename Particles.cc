@@ -18,7 +18,6 @@ Particles::Particles(Point a, Color color_) : Widget(a, {0,0}), color(color_){
 }
 
 void Particles::draw(){
-    cout << counter << endl;
     Point pos = get_pos();
 
     counter++;

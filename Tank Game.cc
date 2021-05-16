@@ -22,7 +22,8 @@ void clr_scr(int x, int y){
 int main() {
     Point canvas_ = {960, 720};
     bool exit = false;
-    bool start_game = false;
+    bool menu_game = false;
+    int switch_count = 0;
 
     gout.open(canvas_.x, canvas_.y);
 
@@ -31,13 +32,13 @@ int main() {
     Wind* wind = new Wind(960, 720, 15);
 
     bool first = true;
-    Tank* tank1 = new Tank({100,700}, {30,10}, 45, true, first, *wind, nullptr);
-    Tank* tank2 = new Tank({840,700}, {30,10}, 135, false, first, *wind, nullptr);
+    Tank* tank1 = new Tank({100,700}, {30,10}, 45, true, first, menu_game, *wind, nullptr);
+    Tank* tank2 = new Tank({840,700}, {30,10}, 135, false, first, menu_game, *wind, nullptr);
 
     tank1->set_target(tank2);
     tank2->set_target(tank1);
 
-    widgets.push_back(new Menu({0, 0}, {canvas_.x, canvas_.y}, exit, start_game));
+    widgets.push_back(new Menu({0, 0}, {canvas_.x, canvas_.y}, exit, menu_game, switch_count));
     widgets.push_back(wind);
     widgets.push_back(tank1);
     widgets.push_back(tank2);
@@ -59,11 +60,18 @@ int main() {
             }
         }
 
-        if(start_game){
+        if(menu_game){
             for(size_t i=0; i < widgets.size(); i++){
                 widgets[i]->set_active(!widgets[i]->get_active());
             }
-            start_game = false;
+            if(switch_count % 2 == 0){
+                widgets[2]->set_pos({100,700});
+                widgets[3]->set_pos({840,700});
+                dynamic_cast<Tank*>(widgets[2])->reset(45, 3);
+                dynamic_cast<Tank*>(widgets[3])->reset(135, 3);
+            }
+
+            menu_game = false;
         }
 
         for(size_t i=0; i < widgets.size(); i++){

@@ -22,9 +22,10 @@ private:
     Particles* particles = nullptr;
     bool turn;
     bool& first;
+    bool& menu_game;
     Wind& wind;
     Tank* target;
-    int health;
+    int health = 3;
     int temp;
 
     void next_turn();
@@ -32,17 +33,22 @@ private:
 
 public:
 
-    Tank(Point a, Size b, int angle_, bool turn_, bool& first_, Wind& wind, Tank* target_);
+    Tank(Point a, Size b, int angle_, bool turn_, bool& first_, bool& menu_game_, Wind& wind, Tank* target_);
 
     void handle_event(const genv::event& evt) override;
 
     void set_target(Tank* tank);
+
+    int get_health();
+    void dmg_health(int dmg); //Nem beállít, hanem kivon.
 
     void do_logic() override;
 
     void draw() override;
 
     void barrel_draw();
+
+    void reset(int angle_, int health_);
 };
 
 

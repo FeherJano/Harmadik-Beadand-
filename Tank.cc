@@ -11,7 +11,9 @@ using namespace genv;
 
 #define PI 3.14159265
 
-Tank::Tank(Point a, Size b, int angle_, bool turn_, bool& first_, Wind& wind, Tank* target_) : Widget(a, b, false), first(first_), wind(wind), target(target_){
+Tank::Tank(Point a, Size b, int angle_, bool turn_, bool& first_, bool& menu_game_, Wind& wind, Tank* target_) : Widget(a, b, false),
+    first(first_), menu_game(menu_game_), wind(wind), target(target_){
+
     turn = turn_;
     tube_angle = angle_;
 }
@@ -46,12 +48,19 @@ void Tank::draw(){
 
     gout << move_to(pos.x,300)
         << color(250,0,0)
-        << text("power: " + to_string(power) + "\n" + "angle: " + to_string(tube_angle));
+        << text("power: " + to_string(power) + "\n" + "angle: " + to_string(tube_angle) + "\n" + "health: " + to_string(health));
 
 }
 
 void Tank::set_target(Tank* target_){
     target = target_;
+}
+
+int Tank::get_health(){
+    return health;
+}
+void Tank::dmg_health(int dmg){
+    health -= dmg;
 }
 
 void Tank::next_turn(){
@@ -75,6 +84,10 @@ void Tank::do_logic() {
         if(bullet->get_velo().y > 0 && p.x >= target->get_pos().x-5 && p.x <= target->get_pos().x+5+target->get_size().w && p.y >= target->get_pos().y-5 && p.y <= target->get_pos().y+5+target->get_size().h){
             temp++;
             cout << temp << endl;
+            target->dmg_health(1);
+            if(target->get_health() == 0){
+                menu_game = true;
+            }
             if(particles == nullptr){
                 particles = new Particles(bullet->get_pos(), {255,255,0});
             }
@@ -153,4 +166,9 @@ void Tank::handle_event(const event& evt) {
             }
         }
     }
+}
+
+void Tank::reset(int angle_, int health_){
+    tube_angle = angle_;
+    health = health_;
 }

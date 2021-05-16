@@ -32,6 +32,10 @@ void Button::draw(){
         << text(name);
 }
 
+void Button::set_name(std::string new_name){
+    name = new_name;
+}
+
 void Button::handle_event(const event& evt) {
     Size size = get_size();
     Point pos = get_pos();

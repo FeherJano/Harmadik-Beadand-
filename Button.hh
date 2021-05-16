@@ -22,6 +22,8 @@ public:
 
     void draw() override;
 
+    void set_name(std::string new_name);
+
     void handle_event(const genv::event& evt) override;
 
 };
