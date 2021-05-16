@@ -64,6 +64,18 @@ void Tank::dmg_health(int dmg){
     health -= dmg;
 }
 
+int Tank::bullet_dmg(){
+    if(bullet_type == 0){
+        return 5;
+    }
+    else if(bullet_type == 1){
+        return 2;
+    }
+    else if(bullet_type == 2){
+        return 1;
+    }
+}
+
 void Tank::next_turn(){
     delete bullet;
     bullet = nullptr;
@@ -84,9 +96,9 @@ void Tank::do_logic() {
         //cout << bullets[i]->get_pos().y << endl;
         if(bullet->get_velo().y > 0 && p.x >= target->get_pos().x- bullet_type*10 && p.x <= target->get_pos().x+ bullet_type*10 +target->get_size().w
            && p.y >= target->get_pos().y-5 && p.y <= target->get_pos().y+5+target->get_size().h){
-            temp++;
-            cout << temp << endl;
-            target->dmg_health(1);
+
+            target->dmg_health(bullet_dmg());
+
             if(target->get_health() == 0){
                 menu_game = true;
             }

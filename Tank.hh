@@ -19,15 +19,14 @@ private:
     int tube_angle = 45;
     int power = 3;
     Bullet* bullet = nullptr;
-    int bullet_type;
+    int bullet_type = 1;
     Particles* particles = nullptr;
     bool turn;
     bool& first;
     bool& menu_game;
     Wind& wind;
     Tank* target;
-    int health = 3;
-    int temp;
+    int health = 5;
 
     void next_turn();
 
@@ -42,6 +41,8 @@ public:
 
     int get_health();
     void dmg_health(int dmg); //Nem beállít, hanem kivon.
+
+    int bullet_dmg();
 
     void do_logic() override;
 
