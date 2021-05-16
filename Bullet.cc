@@ -26,7 +26,7 @@ void Bullet::draw(){
     Size size = get_size();
     Point pos = get_pos();
     gout << move_to(pos.x, pos.y)
-        << color(0,255,0)
+        << color(255,0,0)
         //<< line(velo.x, velo.y)
         << box(size.w,size.h);
 

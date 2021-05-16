@@ -13,7 +13,6 @@ Menu::Menu(Point a, Size b, bool& exit_, bool& game_, int& switch_count_): Widge
     buttons.push_back(new Button({ 450, 400 }, { 60, 40 }, "Quit", [&](event evt) { exit = true;}));
     buttons.push_back(new Button({ 440, 340 }, { 80, 40 }, "START", [&](event evt) {
         game = true;
-        switch_count++;
     }));
 };
 
@@ -31,7 +30,7 @@ void Menu::draw(){
 }
 
 void Menu::do_logic() {
-    if(game && switch_count > 0){
+    if(game && switch_count > -1){
         set_pos({220, 200});
         set_size({520, 320});
         buttons[1]->set_name("Rematch");

@@ -11,10 +11,11 @@ using namespace genv;
 
 #define PI 3.14159265
 
-Particles::Particles(Point a, Color color_) : Widget(a, {0,0}), color(color_){
-    for(int i=0; i<30; i++){
+Particles::Particles(Point a, Color color_, int bullet_type_) : Widget(a, {0,0}), color(color_){
+    for(int i=0; i < number_of_particles ; i++){
         particles.push_back(rand() % 360);
     }
+    range = bullet_type_*2;
 }
 
 void Particles::draw(){

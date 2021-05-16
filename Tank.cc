@@ -48,7 +48,8 @@ void Tank::draw(){
 
     gout << move_to(pos.x,300)
         << color(250,0,0)
-        << text("power: " + to_string(power) + "\n" + "angle: " + to_string(tube_angle) + "\n" + "health: " + to_string(health));
+        << text("power: " + to_string(power) + "\n" + "angle: " + to_string(tube_angle)
+                 + "\n" + "health: " + to_string(health) + "\n" + "bullet type: " + to_string(bullet_type+1));
 
 }
 
@@ -81,7 +82,8 @@ void Tank::do_logic() {
         bullet->do_logic();
         Point p = {bullet->get_pos().x, bullet->get_pos().y};
         //cout << bullets[i]->get_pos().y << endl;
-        if(bullet->get_velo().y > 0 && p.x >= target->get_pos().x-5 && p.x <= target->get_pos().x+5+target->get_size().w && p.y >= target->get_pos().y-5 && p.y <= target->get_pos().y+5+target->get_size().h){
+        if(bullet->get_velo().y > 0 && p.x >= target->get_pos().x- bullet_type*10 && p.x <= target->get_pos().x+ bullet_type*10 +target->get_size().w
+           && p.y >= target->get_pos().y-5 && p.y <= target->get_pos().y+5+target->get_size().h){
             temp++;
             cout << temp << endl;
             target->dmg_health(1);
@@ -89,13 +91,13 @@ void Tank::do_logic() {
                 menu_game = true;
             }
             if(particles == nullptr){
-                particles = new Particles(bullet->get_pos(), {255,255,0});
+                particles = new Particles(bullet->get_pos(), {255,255,0}, bullet_type);
             }
             next_turn();
         }
-        else if(p.y >= 700){
+        else if(p.y >= 700 || p.x < 10 || p.x > 950){
             if(particles == nullptr){
-                particles = new Particles(bullet->get_pos(), {255,0,0});
+                particles = new Particles(bullet->get_pos(), {255,0,0}, bullet_type);
             }
             next_turn();
         }
@@ -114,7 +116,7 @@ void Tank::handle_event(const event& evt) {
 
     if(turn == first){
         if(evt.type == ev_key && evt.keycode == key_enter && bullet == nullptr){
-            bullet = new Bullet({pos.x + size.w/3, pos.y}, tube_angle, power, wind.get_strength() , 1);
+            bullet = new Bullet({pos.x + size.w/3, pos.y}, tube_angle, power, wind.get_strength() , bullet_type);
         }
 
         if(evt.type == ev_key && evt.keycode == 'w' && tube_angle < 170){
@@ -129,6 +131,10 @@ void Tank::handle_event(const event& evt) {
         }
         if(evt.type == ev_key && evt.keycode == 'q' && power > 1){
             power -= 1;
+        }
+
+        if(evt.type == ev_key && (evt.keycode == '1' || evt.keycode == '2' || evt.keycode == '3')){
+            bullet_type = evt.keycode - 48 -1; // A bullet_type-ot egy szorzó ként használom így -1 -el kapok egy nulla szorzót is.
         }
 
         if(evt.type == ev_key && evt.keycode == 'd'){

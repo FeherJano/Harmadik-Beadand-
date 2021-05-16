@@ -19,6 +19,7 @@ private:
     int tube_angle = 45;
     int power = 3;
     Bullet* bullet = nullptr;
+    int bullet_type;
     Particles* particles = nullptr;
     bool turn;
     bool& first;
