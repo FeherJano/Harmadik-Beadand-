@@ -16,9 +16,12 @@ private:
     bool& exit;
     bool& game;
     std::vector<Button*> buttons;
+    std::string title = "Tanky Duel";
+    Point title_pos;
+    bool player1_turn;
 
 public:
-    Menu(Point pos_, Size size_, bool& exit_, bool& game_, int& switch_count_);
+    Menu(Point pos_, Size size_, bool& exit_, bool& game_, int& switch_count_, bool& player1_turn_);
 
     void draw() override;
 
@@ -26,6 +29,5 @@ public:
 
     void handle_event(const genv::event& evt);
 };
-
 
 #endif

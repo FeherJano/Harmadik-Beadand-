@@ -43,7 +43,7 @@ int main() {
     widgets.push_back(wind);
     widgets.push_back(tank1);
     widgets.push_back(tank2);
-    widgets.push_back(new Menu({0, 0}, {canvas_.x, canvas_.y}, exit, menu_game, switch_count));
+    widgets.push_back(new Menu({0, 0}, {canvas_.x, canvas_.y}, exit, menu_game, switch_count, first));
 
     //widgets.push_back(new NumberPicker({0, 0}, {200, 100}, -64, 64, false));
 
