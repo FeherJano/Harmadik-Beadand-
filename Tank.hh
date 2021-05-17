@@ -12,6 +12,8 @@
 #include "Bullet.hh"
 #include "Particles.hh"
 #include "Wind.hh"
+#include "NumberPicker.hh"
+#include "MultipleChoice.hh"
 
 
 class Tank: public Widget {
@@ -27,13 +29,18 @@ private:
     Wind& wind;
     Tank* target;
     int health = 5;
+    int gui_pos_x;
+
+    MultipleChoice bullet_choice;
+    NumberPicker angle_picker;
+    NumberPicker power_picker;
 
     void next_turn();
 
 
 public:
 
-    Tank(Point a, Size b, int angle_, bool turn_, bool& first_, bool& menu_game_, Wind& wind, Tank* target_);
+    Tank(Point a, Size b, int angle_, bool turn_, bool& first_, bool& menu_game_, Wind& wind, Tank* target_, int gui_pos, int long_gui_pos);
 
     void handle_event(const genv::event& evt) override;
 
@@ -49,6 +56,8 @@ public:
     void draw() override;
 
     void barrel_draw();
+
+    void Hp_draw(int pos_y);
 
     void reset(int angle_, int health_);
 };

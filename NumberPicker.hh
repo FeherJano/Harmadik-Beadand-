@@ -11,15 +11,19 @@
 
 class NumberPicker: public Widget {
 private:
-    int number = 0;
+    std::string name;
+    int number;
+    int step;
+    char plus_inp;
+    char minus_inp;
     int number_min;
     int number_max;
     bool selected_e;
 
 public:
-    NumberPicker(Point a, Size b, int border_min, int border_max, bool selected);
+    NumberPicker(Point a, Size b, std::string name_, char plus_inp_, char minus_inp_, int step_, int border_min, int border_max, bool selected);
 
-    NumberPicker(Point a, Size b, int border_min, int border_max);
+    NumberPicker(Point a, Size b, std::string name_, char plus_inp_, char minus_inp_, int step_, int border_min, int border_max);
 
     int get_number();
 

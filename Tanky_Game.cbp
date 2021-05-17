@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Tanky Game" />
+		<Option title="Tanky_Game" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -65,9 +65,9 @@
 		<Unit filename="NumberPicker.hh" />
 		<Unit filename="Particles.cc" />
 		<Unit filename="Particles.hh" />
-		<Unit filename="Tank Game.cc" />
 		<Unit filename="Tank.cc" />
 		<Unit filename="Tank.hh" />
+		<Unit filename="Tank_Game.cc" />
 		<Unit filename="Widget.cc" />
 		<Unit filename="Widget.hh" />
 		<Unit filename="Wind.cc" />

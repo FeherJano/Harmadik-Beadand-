@@ -21,8 +21,11 @@ void Menu::draw(){
     Point pos = get_pos();
 
     gout << move_to(pos.x,pos.y)
+        << color(100,100,100)
+        << box(size.w,size.h)
+        << move_to(pos.x+5,pos.y+5)
         << color(250,235,215)
-        << box(size.w,size.h);
+        << box(size.w-10,size.h-10);
 
     for(size_t i=0; i<buttons.size();i++){
         buttons[i]->draw();

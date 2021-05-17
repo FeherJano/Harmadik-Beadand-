@@ -10,16 +10,20 @@
 using namespace std;
 using namespace genv;
 
-NumberPicker::NumberPicker(Point a, Size b, int border_min, int border_max, bool selected) : Widget(a, b) {
+NumberPicker::NumberPicker(Point a, Size b, string name_, char plus_inp_, char minus_inp_,
+                            int step_, int border_min, int border_max, bool selected) : Widget(a, b) {
     number_min = border_min;
     number_max = border_max;
     selected_e = selected;
+    name = name_;
 }
 
-NumberPicker::NumberPicker(Point a, Size b, int border_min, int border_max) : Widget(a, b) {
+NumberPicker::NumberPicker(Point a, Size b, string name_, char plus_inp_, char minus_inp_,
+                            int step_, int border_min, int border_max) : Widget(a, b) {
     number_min = border_min;
     number_max = border_max;
     selected_e = true;
+    name = name_;
 }
 
 int NumberPicker::get_number(){
@@ -36,6 +40,7 @@ void NumberPicker::draw(){
     Point pos = get_pos();
     string szam = to_string(number);
     int szam_w = gout.twidth(szam);
+    int name_w = gout.twidth(name);
     int szam_h = gout.cascent();
     int mid_h = pos.y + size.h/4 + (size.h/2 + szam_h)/2;
 
@@ -62,6 +67,8 @@ void NumberPicker::draw(){
         << text('+');
     gout << move_to(pos.x + size.w/4 + (size.w/2 - szam_w)/2, mid_h)
         << text(szam);
+    gout << move_to(pos.x + size.w/4 + (size.w/2 - name_w)/2, pos.y + size.h/4)
+        << text(name);
 }
 
 void NumberPicker::handle_event(const event& evt) {
@@ -85,20 +92,14 @@ void NumberPicker::handle_event(const event& evt) {
         }
     }
     if(evt.type == ev_key && selected_e == true){
-        if(evt.keycode == 's' && number > number_min) { //key_down == 81
-            number--;
-        }
-        if(evt.keycode == 'w' && number < number_max) { // key_up == 82
-            number++;
-        }
-        if(evt.keycode == 'd') { //key_pgdn == 69
-            number -= 10;
+        if(evt.keycode == minus_inp) { //key_pgdn == 69
+            number -= step;
             if(number < number_min){
                 number = number_min;
             }
         }
-        if(evt.keycode == 'e') {// key_pgup == 68
-            number += 10;
+        if(evt.keycode == plus_inp) {// key_pgup == 68
+            number += step;
             if(number > number_max){
                 number = number_max;
             }

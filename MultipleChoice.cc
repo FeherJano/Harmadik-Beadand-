@@ -45,9 +45,11 @@ void MultipleChoice::draw(){
     Point pos = get_pos();
 
     if(selected == true){
-        gout << move_to(pos.x-5, pos.y-5)
-            << color(114,178,17)
-            << box(size.w+10, size.h+10);
+        if(pos.x >= 5 && pos.y >= 5) {
+            gout << move_to(pos.x-5, pos.y-5)
+                << color(114,178,17)
+                << box(size.w+10, size.h+10);
+        }
     }
 
     gout << move_to(pos.x,pos.y)
@@ -84,6 +86,10 @@ int MultipleChoice::get_selected_index(){
 
 string MultipleChoice::get_text(){
     return choices[active_choice];
+}
+
+void MultipleChoice::set_selected_index(int index){
+    active_choice = index;
 }
 
 void MultipleChoice::add_choice(string a_choice){

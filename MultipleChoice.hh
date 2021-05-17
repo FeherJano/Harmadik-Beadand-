@@ -30,6 +30,8 @@ public:
 
     int get_selected_index();
 
+    void set_selected_index(int index);
+
     std::string get_text();
 
     void draw() override;
