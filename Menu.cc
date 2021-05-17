@@ -9,7 +9,8 @@
 using namespace std;
 using namespace genv;
 
-Menu::Menu(Point a, Size b, bool& exit_, bool& game_, int& switch_count_, bool& player1_turn_): Widget(a, b, true), exit(exit_), game(game_), switch_count(switch_count_) {
+Menu::Menu(Point a, Size b, bool& exit_, bool& game_, int& switch_count_, bool& player1_turn_): Widget(a, b, true),
+        exit(exit_), game(game_), switch_count(switch_count_), player1_turn(player1_turn_) {
     buttons.push_back(new Button({ 450, 400 }, { 60, 40 }, "Quit", [&](event evt) { exit = true;}));
     buttons.push_back(new Button({ 440, 340 }, { 80, 40 }, "START", [&](event evt) {
         game = true;
@@ -54,10 +55,10 @@ void Menu::do_logic() {
         set_size({520, 320});
         buttons[1]->set_name("Rematch");
         if(player1_turn){
-            title = "Game Over, Player 2 won";
+            title = "Game Over, Player 1 won";
         }
         else{
-            title = "Game Over, Player 1 won";
+            title = "Game Over, Player 2 won";
         }
     }
 }

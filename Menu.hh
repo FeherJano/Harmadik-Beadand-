@@ -18,7 +18,7 @@ private:
     std::vector<Button*> buttons;
     std::string title = "Tanky Duel";
     Point title_pos;
-    bool player1_turn;
+    bool& player1_turn;
 
 public:
     Menu(Point pos_, Size size_, bool& exit_, bool& game_, int& switch_count_, bool& player1_turn_);
